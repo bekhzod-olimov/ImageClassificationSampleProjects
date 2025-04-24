@@ -5,23 +5,17 @@ class DatasetDownloader:
     def __init__(self, save_dir):
         self.save_dir = save_dir
         self.available_datasets = {
-            "pet_disease": "kaggle datasets download smadive/pet-disease-images",
-            "cars_detection": "kaggle datasets download -d killa92/car-detect-dataset",
+            "pet_disease": "kaggle datasets download smadive/pet-disease-images",            
             "car_brands": "kaggle datasets download mohamedaziz15/cars-brands-in-egypt",
-            "apple_disease": "kaggle datasets download -d killa92/apple-disease-dataset",
-            "insects": "kaggle datasets download -d killa92/arthropodia-semantic-segmentation-dataset",
+            "apple_disease": "kaggle datasets download -d killa92/apple-disease-dataset",            
             "crop": "kaggle datasets download -d killa92/crop-disease-image-classification-dataset",
             "dog_breeds": "kaggle datasets download kabilan03/dogbreedclassification",
             "rice_leaf_disease": "kaggle datasets download -d killa92/rice-leaf-disease-classification-dataset",
             "lentils": "kaggle datasets download -d killa92/lentils-classification-dataset",
             "brain": "kaggle datasets download -d killa92/brain-ct-tumor-classification-dataset",
-            "fruits": "kaggle datasets download -d killa92/fruits-classification-dataset",
-            "aeroscapes": "kaggle datasets download -d killa92/aerospaces-semantic-segmentation-dataset",
-            "cardiac": "kaggle datasets download -d killa92/cardiac-semantic-segmentation-dataset",
-            "vehicles": "kaggle datasets download -d killa92/vehicle-detection-dataset",
+            "fruits": "kaggle datasets download -d killa92/fruits-classification-dataset",                                    
             "cloud": "kaggle datasets download -d killa92/cloud-quality-images-classification-dataset",
-            "skin_lesion": "kaggle datasets download -d killa92/skin-lesion-image-ham-classification",
-            "comments": "kaggle datasets download -d killa92/comments-nlp-sentiment-analysis-dataset",
+            "skin_lesion": "kaggle datasets download -d killa92/skin-lesion-image-ham-classification",            
             "3d_data": "kaggle datasets download glxslzt/3cla-adni",
             "50_car_brands": "kaggle datasets download yamaerenay/100-images-of-top-50-car-brands"
         }
