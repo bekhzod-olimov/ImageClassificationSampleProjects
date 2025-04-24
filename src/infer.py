@@ -32,13 +32,13 @@ class ModelInferenceVisualizer:
         self.outputs_dir = outputs_dir        
         self.ds_nomi = ds_nomi
         self.im_size = im_size
-        self.model.eval()  # Set model to evaluation mode
+        self.model.eval()  
         self.f1_metric = torchmetrics.F1Score(task="multiclass", num_classes=len(class_names)).to(self.device)
 
     def tensor_to_image(self, tensor):
         
-        tensor = self.denormalize(tensor)  # Denormalize the tensor
-        tensor = tensor.permute(1, 2, 0)  # Convert from CxHxW to HxWxC
+        tensor = self.denormalize(tensor)  
+        tensor = tensor.permute(1, 2, 0)  
         return (tensor.cpu().numpy() * 255).astype(np.uint8)
 
     def plot_value_array(self, logits, gt, class_names):
@@ -81,7 +81,6 @@ class ModelInferenceVisualizer:
         di["original_im"] = im
         di["gradcam"] = gradcam
         
-
         return di
 
     def infer_and_visualize(self, test_dl, num_images=5, rows=2, demo=False):
@@ -96,7 +95,7 @@ class ModelInferenceVisualizer:
                 pred_class = torch.argmax(logits, dim=1)
                 
                 accuracy += (pred_class == gt).sum().item()
-                self.f1_metric.update(logits, gt)  # Do NOT reset inside the loop
+                self.f1_metric.update(logits, gt)  
         
                 images.append(im[0])
                 logitss.append(logits[0])
