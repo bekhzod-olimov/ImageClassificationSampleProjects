@@ -83,8 +83,7 @@ class TrainValidation:
         with torch.no_grad():
             for idx, batch in tqdm(enumerate(self.val_dl), desc="Validation"):
                 if self.dev_mode: 
-                    if idx == 1: break
-                # ims, gts = self.to_device((ims, gts))
+                    if idx == 1: break                
                 ims, gts = TrainValidation.to_device(batch, device = self.device)
                 preds = self.model(ims)
                 loss = self.loss_fn(preds, gts)
@@ -143,5 +142,3 @@ class TrainValidation:
             if self.not_improved >= self.patience:
                 print("Early stopping triggered.")
                 break
-
-
