@@ -50,8 +50,7 @@ class CustomDataset(Dataset):
         
         im_path = self.im_paths[idx]
         im = Image.open(im_path)
-        if im.mode != "RGB": im = im.convert("RGB")
-        
+        if im.mode != "RGB": im = im.convert("RGB")        
         gt = self.cls_names[self.get_class(im_path)]
 
         if self.tfs: im = self.tfs(im)
