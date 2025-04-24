@@ -8,21 +8,17 @@ from glob import glob
 from src.infer import ModelInferenceVisualizer 
 from data.parse import CustomDataset
 
-
 st.set_page_config(page_title="Image Classification Demo", layout="wide")
 @st.cache_resource
 def load_model(model_path, model_name, num_classes, device):
     import timm
     model = timm.create_model(model_name=model_name, num_classes=num_classes)
-    model.load_state_dict(torch.load(model_path, map_location=device))
-    model.eval().to(device)
-    return model
+    model.load_state_dict(torch.load(model_path, map_location=device))    
+    return model.eval().to(device)
 
 @st.cache_data
 def load_class_names(pkl_path):
-    with open(pkl_path, "rb") as fp:
-        return pickle.load(fp)
-
+    with open(pkl_path, "rb") as fp: return pickle.load(fp)
 
 class StreamlitApp:
     def __init__(self, ds_nomi, model_name):
