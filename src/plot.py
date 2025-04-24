@@ -17,10 +17,7 @@ class PlotLearningCurves:
     
     def decorate(self, ylabel, xlabel = "Epochs"): 
         
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
-        plt.xticks(ticks = np.arange(len(self.tr_accs)), labels = [i for i in range(1, len(self.tr_accs) + 1)])
-        plt.legend()        
+        plt.xlabel(xlabel); plt.ylabel(ylabel); plt.xticks(ticks = np.arange(len(self.tr_accs)), labels = [i for i in range(1, len(self.tr_accs) + 1)]); plt.legend()        
         
     def visualize(self):
         
@@ -41,5 +38,3 @@ class PlotLearningCurves:
         self.plot(array_1 = self.tr_f1s, array_2 = self.val_f1s, label_1 = "Train F1 Score", label_2 = "Validation F1 Score", color_1 = "#8A2BE2", color_2 = "#DC143C")  # BlueViolet and Crimson
         self.decorate(ylabel = "F1 Scores")
         plt.savefig(f"{self.save_dir}/{self.ds_nomi}_f1_scores.png")
-        
-
