@@ -88,12 +88,12 @@ class Visualization:
         print("Generating pie chart...\n")
         labels = list(cls_counts.keys())
         sizes = list(cls_counts.values())
-        explode = [0.1] * len(labels)  # To highlight all slices equally (optional)
+        explode = [0.1] * len(labels)
         
         plt.figure(figsize=(8, 8))
         plt.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
         plt.title("Class Distribution")
-        plt.axis("equal")  # Equal aspect ratio ensures the pie chart is circular
+        plt.axis("equal")
         plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_pie_chart.png")
 
     def visualization(self): [self.vis(data.dataset, save_name) for (save_name, data) in self.vis_datas.items()]
