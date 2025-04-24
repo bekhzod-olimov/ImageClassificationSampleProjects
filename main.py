@@ -41,10 +41,8 @@ def main():
         device = "cuda" if torch.cuda.is_available() else "cpu"
         ds_path = os.path.join(args.dataset_root, args.dataset_name)
 
-        if not os.path.isdir(ds_path):
-            DatasetDownloader(save_dir=ds_path).download(ds_nomi=args.dataset_name)
-        else:
-            print(f"{args.dataset_name} dataseti allaqachon {args.dataset_root} yo'lagiga yuklab olingan.")
+        if not os.path.isdir(ds_path): DatasetDownloader(save_dir=ds_path).download(ds_nomi=args.dataset_name)
+        else: print(f"{args.dataset_name} dataseti allaqachon {args.dataset_root} yo'lagiga yuklab olingan.")
 
         mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
         tfs = get_tfs(im_size=args.image_size, mean=mean, std=std)    
@@ -71,9 +69,7 @@ def main():
             cls_names=list(classes.keys()),
             cls_counts=cls_counts
         )
-        vis.analysis()
-        vis.pie_chart()
-        vis.visualization()
+        vis.analysis(); vis.pie_chart(); vis.visualization()
 
         trainer = TrainValidation(
             model_name=args.model_name,
