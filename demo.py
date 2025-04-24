@@ -5,7 +5,7 @@ import os
 import pickle
 from PIL import Image
 from glob import glob
-from src.infer import ModelInferenceVisualizer  # Your custom class
+from src.infer import ModelInferenceVisualizer 
 from data.parse import CustomDataset
 
 
@@ -28,7 +28,7 @@ class StreamlitApp:
     def __init__(self, ds_nomi, model_name):
         self.ds_nomi = ds_nomi
         self.model_name = model_name        
-        self.lang_code = "en"  # default language
+        self.lang_code = "en" 
 
         self.LANGUAGES = {
             "en": {
@@ -151,12 +151,3 @@ if __name__ == "__main__":
         model_name=model_name        
     )
     app.run()
-
-# if __name__ == "__main__":
-#     args = parse_args()
-#     app = StreamlitApp(
-#         ds_nomi=args.ds_nomi,
-#         model_name=args.model_name,        
-#         outputs_dir=args.outputs_dir
-#     )
-#     app.run()
