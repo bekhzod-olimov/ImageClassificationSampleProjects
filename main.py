@@ -15,6 +15,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Train and evaluate a classification model")
 
     parser.add_argument('--dataset_name', type=str, default="lentils", help="Name of the dataset")
+    parser.add_argument('--device', type=str, help="GPU/CPU for training")
     parser.add_argument('--dataset_root', type=str, default="/home/bekhzod/Desktop/backup/image_classification_project_datasets", help="Root folder for datasets")
     parser.add_argument('--cls_root', type=str, default="saved_cls_names", help="Root folder for class names")
     parser.add_argument('--vis_dir', type=str, default="vis", help="Directory for visualizations")
@@ -39,7 +40,7 @@ def main():
 
         args.dataset_name = ds_nomi
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = args.device
         ds_path = os.path.join(args.dataset_root, args.dataset_name)
 
         if not os.path.isdir(ds_path): DatasetDownloader(save_dir=ds_path).download(ds_nomi=args.dataset_name)
