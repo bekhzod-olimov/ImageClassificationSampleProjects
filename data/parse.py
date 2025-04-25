@@ -18,6 +18,7 @@ class CustomDataset(Dataset):
 
     def get_root(self): 
         if self.ds_nomi == "pet_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/data"
+        if self.ds_nomi == "geo_scene": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/GeoSceneNet16K"
         if self.ds_nomi == "lentils": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/lentils/data"        
         elif self.ds_nomi == "rice_leaf_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/rice_leaf_disease/Rice Leaf  Disease Dataset"
         elif self.ds_nomi == "car_brands": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/car_brands"
@@ -25,7 +26,7 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "apple_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/{self.ds_nomi}/images"
     
     def get_files(self): 
-        if self.ds_nomi in ["pet_disease", "rice_leaf_disease", "car_brands"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*{im_file}")]        
+        if self.ds_nomi in ["pet_disease", "rice_leaf_disease", "car_brands", "geo_scene"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*{im_file}")]        
         elif self.ds_nomi in ["dog_breeds"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*/*{im_file}")]
         elif self.ds_nomi in ["lentils", "apple_disease"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*{im_file}")]
 
