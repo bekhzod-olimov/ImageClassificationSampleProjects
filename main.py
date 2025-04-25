@@ -30,7 +30,8 @@ def parse_args():
 
 def main():
     args = parse_args()
-    ds_nomlari = ["car_brands", "dog_breeds", "lentils", "pet_disease", "rice_leaf_disease"]
+    # ds_nomlari = ["car_brands", "dog_breeds", "lentils", "pet_disease", "rice_leaf_disease", "apple_disease"]
+    ds_nomlari = ["apple_disease"]
 
     for ds_nomi in ds_nomlari:
 

@@ -22,11 +22,12 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "rice_leaf_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/rice_leaf_disease/Rice Leaf  Disease Dataset"
         elif self.ds_nomi == "car_brands": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/car_brands"
         elif self.ds_nomi == "dog_breeds": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/dog_breeds/Dog Breed Classification"        
+        elif self.ds_nomi == "apple_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/{self.ds_nomi}/images"
     
     def get_files(self): 
         if self.ds_nomi in ["pet_disease", "rice_leaf_disease", "car_brands"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*{im_file}")]        
         elif self.ds_nomi in ["dog_breeds"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*/*{im_file}")]
-        elif self.ds_nomi in ["lentils"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*{im_file}")]
+        elif self.ds_nomi in ["lentils", "apple_disease"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*{im_file}")]
 
     def get_info(self):
 
@@ -41,7 +42,7 @@ class CustomDataset(Dataset):
             else: self.cls_counts[class_name] += 1
     
     def get_class(self, path): 
-        if self.ds_nomi == "lentils": return os.path.basename(path).split("_")[0]
+        if self.ds_nomi in ["lentils", "apple_disease"]: return os.path.basename(path).split("_")[0]
         else: return os.path.dirname(path).split("/")[-1]
 
     def __len__(self): return len(self.im_paths)
