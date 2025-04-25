@@ -58,7 +58,7 @@ class ModelInferenceVisualizer:
 
     def generate_cam_visualization(self, image_tensor):
         
-        cam = GradCAMPlusPlus(model=self.model, target_layers=[self.model.features[-1]], use_cuda=self.device == "cuda")
+        cam = GradCAM(model=self.model, target_layers=[self.model.features[-1].conv], use_cuda=self.device == "cuda")
         grayscale_cam = cam(input_tensor=image_tensor.unsqueeze(0))[0, :]
         return grayscale_cam
 
