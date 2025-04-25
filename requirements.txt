@@ -1,6 +1,7 @@
 altair<5
 seaborn
 torch
+kaggle
 torchvision
 timm
 pytorch-lightning

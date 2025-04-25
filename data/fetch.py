@@ -5,7 +5,8 @@ class DatasetDownloader:
     def __init__(self, save_dir):
         self.save_dir = save_dir
         self.available_datasets = {
-            "pet_disease": "kaggle datasets download smadive/pet-disease-images",            
+            "pet_disease": "kaggle datasets download smadive/pet-disease-images",  
+            "geo_scene": "kaggle datasets download prithivsakthiur/multilabel-geoscenenet-16k",                      
             "car_brands": "kaggle datasets download mohamedaziz15/cars-brands-in-egypt",
             "apple_disease": "kaggle datasets download -d killa92/apple-disease-dataset",            
             "crop": "kaggle datasets download -d killa92/crop-disease-image-classification-dataset",
