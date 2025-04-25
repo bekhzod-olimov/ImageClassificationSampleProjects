@@ -95,7 +95,7 @@ class StreamlitApp:
             ds = CustomDataset(ims_dir, ds_nomi=self.ds_nomi)
             random_images = random.sample(ds.im_paths, 5)
             for idx, path in enumerate(random_images):
-                cls_name = os.path.basename(path).split("_")[0]  if self.ds_nomi == "lentils" else os.path.basename(os.path.dirname(path))
+                cls_name = os.path.basename(path).split("_")[0]  if self.ds_nomi in ["lentils", "apple_disease"] else os.path.basename(os.path.dirname(path))
                 with Image.open(path).convert("RGB") as im:
                     im.save(os.path.join(save_dir, f"sample_im_{idx + 1}___{cls_name}.png"))
             sample_image_paths = glob(os.path.join(save_dir, "*.png"))
