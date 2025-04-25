@@ -96,7 +96,7 @@ class Visualization:
         plt.axis("equal")
         plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_pie_chart.png")
 
-    def visualization(self): [self.vis(data.dataset, save_name) for (save_name, data) in self.vis_datas.items()]
+    def visualization(self):  [self.vis(data if self.ds_nomi in ["facial_expression"] else data.dataset, save_name) for (save_name, data) in self.vis_datas.items()]
         
     def analysis(self): [self.data_analysis(data, save_name) for (save_name, data) in self.analysis_datas.items()]
 

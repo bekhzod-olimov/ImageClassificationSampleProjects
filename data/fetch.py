@@ -6,7 +6,8 @@ class DatasetDownloader:
         self.save_dir = save_dir
         self.available_datasets = {
             "pet_disease": "kaggle datasets download smadive/pet-disease-images",  
-            "geo_scene": "kaggle datasets download prithivsakthiur/multilabel-geoscenenet-16k",                      
+            "geo_scene": "kaggle datasets download prithivsakthiur/multilabel-geoscenenet-16k",
+            "facial_expression": "kaggle datasets download dollyprajapati182/balanced-raf-db-dataset-7575-grayscale",
             "car_brands": "kaggle datasets download mohamedaziz15/cars-brands-in-egypt",
             "apple_disease": "kaggle datasets download -d killa92/apple-disease-dataset",            
             "crop": "kaggle datasets download -d killa92/crop-disease-image-classification-dataset",
