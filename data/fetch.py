@@ -19,7 +19,8 @@ class DatasetDownloader:
             "cloud": "kaggle datasets download -d killa92/cloud-quality-images-classification-dataset",
             "skin_lesion": "kaggle datasets download -d killa92/skin-lesion-image-ham-classification",            
             "3d_data": "kaggle datasets download glxslzt/3cla-adni",
-            "50_car_brands": "kaggle datasets download yamaerenay/100-images-of-top-50-car-brands"
+            "50_car_brands": "kaggle datasets download yamaerenay/100-images-of-top-50-car-brands",
+            "animals": "kaggle datasets download senju14/multi-animal-image-and-vqa-dataset"
         }
 
     def download(self, ds_nomi="lentils"):
