@@ -1,3 +1,5 @@
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 import streamlit as st
 import torch
 import random
@@ -113,18 +115,34 @@ class StreamlitApp:
                 ground_truth_label = result['gt']
 
             st.subheader(self.LANGUAGES[self.lang_code]["result_label"])
-            col1, col2 = st.columns(2)
 
-            with col1:
+            row1_col1, row1_col2 = st.columns(2)
+            row2_col1, row2_col2 = st.columns(2)
+
+            with row1_col1:
+                st.markdown(f"<h3 style='text-align: center;'> Original Input Image </h3>", unsafe_allow_html=True)
+                st.image(result["original_im"], use_container_width=True)
+
+            with row1_col2:
+                st.markdown(f"<h3 style='text-align: center;'> The Model Decision Heatmap </h3>", unsafe_allow_html=True)
+                st.image(result["gradcam"], use_container_width=True)
+                
+            with row2_col1:
                 st.markdown(f"<h3 style='text-align: center;'>GT: {ground_truth_label}</h3>", unsafe_allow_html=True)
                 st.image(result["original_im"], use_container_width=True)
 
-            with col2:
+            with row2_col2:
+                st.markdown(f"<h3 style='text-align: center; color: green;'>PRED: {predicted_class}</h3>", unsafe_allow_html=True)
+                st.image(result["probs"], use_container_width=True)
+                
                 st.markdown(
-                    f"<h3 style='text-align: center; color: green;'>PRED: {predicted_class}</h3>",
+                    f"""
+                    <div style='text-align: center; width: 100%;'>
+                        The model is {(result["confidence"]):.2f}% confident that the image belongs to → {predicted_class} class!
+                    </div>
+                    """,
                     unsafe_allow_html=True
                 )
-                st.image(result["gradcam"], use_container_width=True)
 
         else:
             st.warning("Please select or upload an image.")
