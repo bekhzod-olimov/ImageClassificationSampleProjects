@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument('--model_name', type=str, default="rexnet_150", help="Model architecture from timm")
     parser.add_argument('--save_dir', type=str, default="saved_models", help="Directory to save the model checkpoints")
     parser.add_argument('--image_size', type=int, default=224, help="Input image size for the model")
-    parser.add_argument('--batch_size', type=int, default=32, help="Batch size for dataloaders")
+    parser.add_argument('--batch_size', type=int, default=16, help="Batch size for dataloaders")
     parser.add_argument('--patience', type=int, default=3, help="Early stopping patience")
 
     return parser.parse_args()
