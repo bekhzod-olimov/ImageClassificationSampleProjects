@@ -51,10 +51,20 @@ class ModelInferenceVisualizer:
         plt.yticks(np.arange(0.0, 1.1, 0.1))
         bars = plt.bar(range(len(class_names)), [p.item() for p in probs[0]], color="#777777")
         plt.ylim([0, 1])
-        if pred_class.item() == gt:
-            bars[pred_class].set_color('green')
+        if isinstance(gt, str):
+            bars[pred_class].set_color('green') if pred_class.item() == class_names[gt] else bars[pred_class].set_color('red')            
         else:
-            bars[pred_class].set_color('red')
+            bars[pred_class].set_color('green') if pred_class.item() == gt else bars[pred_class].set_color('red')
+        
+        # Save figure to a buffer
+        import io
+        buf = io.BytesIO()
+        plt.tight_layout()
+        plt.savefig(buf, format='png')
+        plt.close()  # Close the figure after saving it to free memory
+        buf.seek(0)
+
+        return buf 
 
     def generate_cam_visualization(self, image_tensor):
         
@@ -74,12 +84,16 @@ class ModelInferenceVisualizer:
 
         grayscale_cam = cv2.resize(self.generate_cam_visualization(im_tn.squeeze(dim=0)), im_size)
         gradcam = show_cam_on_image(np.array(im).astype(np.uint8) / 255, grayscale_cam, image_weight=0.4, use_rgb=True)
+        if logits.dim() == 1:  # If 1D, add a batch dimension
+            logits = logits.unsqueeze(0)
                 
         di = {}
         di["pred"] = pred.item()
         di["gt"] = gt
         di["original_im"] = im
         di["gradcam"] = gradcam
+        di["probs"]   = self.plot_value_array(logits=logits, gt=gt, class_names=self.class_names)
+        di["confidence"] = (torch.max(torch.nn.functional.softmax(logits, dim=1), dim = 1)[0].item() * 100)
         
         return di
 
@@ -132,7 +146,7 @@ class ModelInferenceVisualizer:
                 logits = logits.unsqueeze(0)
             plt.subplot(rows, 2 * num_images // rows, count)
             count += 1
-            self.plot_value_array(logits=logits, gt=gt_idx, class_names=self.class_names)
+            bars = self.plot_value_array(logits=logits, gt=gt_idx, class_names=self.class_names)
 
             # Title with GT and Prediction
             if self.class_names:
