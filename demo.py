@@ -137,8 +137,8 @@ class StreamlitApp:
                 
                 st.markdown(
                     f"""
-                    <div style='text-align: center; width: 100%;'>
-                        The model is {(result["confidence"]):.2f}% confident that the image belongs to → {predicted_class} class!
+                    <div style='text-align: center; width: 100%; font-size: 48px;'>
+                        The model is <i>{(result["confidence"]):.2f}%</i> confident that the image belongs to → <b>{predicted_class.upper()}</b> class!
                     </div>
                     """,
                     unsafe_allow_html=True
