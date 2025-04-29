@@ -26,6 +26,7 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "car_brands": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/car_brands"
         elif self.ds_nomi == "dog_breeds": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/dog_breeds/Dog Breed Classification"        
         elif self.ds_nomi == "apple_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/{self.ds_nomi}/images"
+        elif self.ds_nomi == "animals": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/animal_dataset/animal_dataset/{self.ds_nomi}/{self.ds_nomi}"        
     
     def get_files(self): 
         if self.ds_nomi in ["dog_breeds"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*/*{im_file}")]        
@@ -84,7 +85,7 @@ class CustomDataset(Dataset):
 
             tr_ds, vl_ds, ts_ds = random_split(ds, [tr_len, vl_len, ts_len])
 
-            cls_names = ds.cls_names, cls_counts = ds.cls_counts
+            cls_names = ds.cls_names; cls_counts = ds.cls_counts
 
         tr_dl = DataLoader(tr_ds, batch_size=bs, shuffle=True, num_workers=ns)
         val_dl = DataLoader(vl_ds, batch_size=bs, shuffle=False, num_workers=ns)
