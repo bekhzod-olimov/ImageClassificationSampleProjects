@@ -62,7 +62,7 @@ The links to the datasets can be found in the [fetch script](https://github.com/
 
  * The more is coming...
 
- ## 🛠️ How to Use This Repo
+ ## 🛠️ Manual to Use This Repo
 
  ### 🔁 Train and Evaluate a Model
 Run the training and evaluation pipeline:
