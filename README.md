@@ -62,3 +62,27 @@ The links to the datasets can be found in the [fetch script](https://github.com/
 
  * The more is coming...
 
+ ## 🛠️ How to Use This Repo
+
+ ### 🔁 Train and Evaluate a Model
+Run the training and evaluation pipeline:
+
+```bash
+
+python main.py --dataset_name pet_disease --dataset_root PATH_TO_YOUR_DATA --batch_size 32 --device "cuda"
+
+```
+
+### 🌐 Streamlit Demo
+
+```bash
+
+streamlit run demo.py --ds_nomi pet_disease --outputs_dir PATH_TO_YOUR_OUTPUTS_DIR --model_name "rexnet_150"
+
+```
+
+## 🤝 Contributing
+Have an idea or found a bug? Feel free to open an issue or a pull request. Contributions are welcome!
+
+## 📃 License
+This project is open source and available under the MIT License.
