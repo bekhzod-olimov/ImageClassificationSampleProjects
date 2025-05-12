@@ -58,7 +58,9 @@ The links to the datasets can be found in the [fetch script](https://github.com/
 
  * Pet Disease Dataset;
 
- * Rice Leaf Disease Dataset
+ * Rice Leaf Disease Dataset;
+
+ * Pokemon Dataset
 
  * The more is coming...
 
