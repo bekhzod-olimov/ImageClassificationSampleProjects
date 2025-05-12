@@ -14,7 +14,7 @@ from data.fetch import DatasetDownloader
 def parse_args():
     parser = argparse.ArgumentParser(description="Train and evaluate a classification model")
 
-    parser.add_argument('--ds_nomi', type=str, required=True, help="Name of the dataset")
+    parser.add_argument('-ds_nomi', '--dataset_nomi', type=str, required=True, help="Name of the dataset")
     parser.add_argument('--device', type=str, help="GPU/CPU for training")
     parser.add_argument('--dataset_root', type=str, default="/home/bekhzod/Desktop/backup/image_classification_project_datasets", help="Root folder for datasets")
     parser.add_argument('--cls_root', type=str, default="saved_cls_names", help="Root folder for class names")
