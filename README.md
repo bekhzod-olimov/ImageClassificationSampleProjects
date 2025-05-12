@@ -77,7 +77,7 @@ python main.py --dataset_name pet_disease --dataset_root PATH_TO_YOUR_DATA --bat
 
 ```bash
 
-streamlit run demo.py --ds_nomi pet_disease --outputs_dir PATH_TO_YOUR_OUTPUTS_DIR --model_name "rexnet_150"
+streamlit run demo.py
 
 ```
 
