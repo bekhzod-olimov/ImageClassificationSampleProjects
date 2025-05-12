@@ -62,8 +62,9 @@ class TrainValidation:
             
             # Update metrics
             train_loss += loss.item()
-            train_acc += (torch.argmax(preds, dim=1) == gts).sum().item()
-            self.f1_metric.update(preds, gts)
+            pred_class = torch.argmax(preds, dim=1)
+            train_acc += (pred_class == gts).sum().item()
+            self.f1_metric.update(pred_class, gts)
 
         train_loss /= len(self.tr_dl)
         train_acc /= len(self.tr_dl.dataset)
@@ -90,8 +91,9 @@ class TrainValidation:
 
                 # Update metrics
                 val_loss += loss.item()
-                val_acc += (torch.argmax(preds, dim=1) == gts).sum().item()
-                self.f1_metric.update(preds, gts)
+                pred_class = torch.argmax(preds, dim=1)
+                val_acc += (pred_class == gts).sum().item()
+                self.f1_metric.update(pred_class, gts)
 
         val_loss /= len(self.val_dl)
         val_acc /= len(self.val_dl.dataset)
