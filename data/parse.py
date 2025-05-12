@@ -27,12 +27,14 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "dog_breeds": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/dog_breeds/Dog Breed Classification"        
         elif self.ds_nomi == "apple_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/{self.ds_nomi}/images"
         elif self.ds_nomi == "animals": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/animal_dataset/animal_dataset/{self.ds_nomi}/{self.ds_nomi}"        
+        elif self.ds_nomi == "pokemon": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/dataset"        
         
     
     def get_files(self): 
         if self.ds_nomi in ["dog_breeds"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*/*{im_file}")]        
         elif self.ds_nomi in ["lentils", "apple_disease"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*{im_file}")]
         elif self.ds_nomi in ["facial_expression"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/{self.data_type}/*/*{im_file}")]
+        elif self.ds_nomi in ["pokemon"]: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/{self.data_type}/*/*{im_file}")]
         else: self.im_paths = [path for im_file in self.im_files for path in glob(f"{self.root}/*/*{im_file}")] 
 
     def get_info(self):
@@ -74,6 +76,19 @@ class CustomDataset(Dataset):
             ts_ds = cls(data_turgan_yolak=data_turgan_yolak, data_type = "test", ds_nomi=ds_nomi, tfs=tfs)
 
             cls_names, cls_counts = tr_ds.cls_names, [tr_ds.cls_counts, vl_ds.cls_counts, ts_ds.cls_counts]
+
+        elif ds_nomi in ["pokemon"]:
+
+            tr_ds = cls(data_turgan_yolak=data_turgan_yolak, data_type = "train", ds_nomi=ds_nomi, tfs=tfs)            
+            ts_ds = cls(data_turgan_yolak=data_turgan_yolak, data_type = "test", ds_nomi=ds_nomi, tfs=tfs)
+
+            cls_names, cls_counts = tr_ds.cls_names, [tr_ds.cls_counts, ts_ds.cls_counts]           
+
+            total_len = len(tr_ds)
+            tr_len = int(total_len * split[0])
+            vl_len = total_len - tr_len        
+
+            tr_ds, vl_ds = random_split(tr_ds, [tr_len, vl_len])            
 
         else: 
         
