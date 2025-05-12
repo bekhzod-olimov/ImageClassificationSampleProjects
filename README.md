@@ -68,8 +68,7 @@ The links to the datasets can be found in the [fetch script](https://github.com/
 Run the training and evaluation pipeline:
 
 ```bash
-
-python main.py --dataset_name pet_disease --dataset_root PATH_TO_YOUR_DATA --batch_size 32 --device "cuda"
+python main.py --ds_nomi pet_disease --dataset_root PATH_TO_YOUR_DATA --batch_size 32 --device "cuda"
 
 ```
 
