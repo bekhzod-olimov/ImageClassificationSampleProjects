@@ -51,7 +51,10 @@ class Visualization:
 
         for idx, index in enumerate(indices):
             if count == self.n_ims + 1: break
-            image, label = data.dataset[index]            
+            try: 
+                image, label = data.dataset[index]
+            except:
+                image, label = data[index]
             plt.subplot(self.rows, self.n_ims // self.rows, idx + 1)
             image = self.tn2np(image)
             if Image.fromarray(image).mode != "RGB": image = image.convert("RGB")
