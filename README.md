@@ -60,7 +60,9 @@ The links to the datasets can be found in the [fetch script](https://github.com/
 
  * Rice Leaf Disease Dataset;
 
- * Pokemon Dataset
+ * Pokemon Dataset;
+
+ * Remote Sensing (PatternNet) Dataset 
 
  * The more is coming...
 

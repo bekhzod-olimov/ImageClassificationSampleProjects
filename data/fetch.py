@@ -21,6 +21,7 @@ class DatasetDownloader:
             "3d_data": "kaggle datasets download glxslzt/3cla-adni",
             "50_car_brands": "kaggle datasets download yamaerenay/100-images-of-top-50-car-brands",
             "pokemon": "kaggle datasets download rogerkoala/first-gen-pokemon",            
+            "remote_sensing": "kaggle datasets download abidhasanrafi/patternnet",
             "animals": "kaggle datasets download senju14/multi-animal-image-and-vqa-dataset"
         }
 
