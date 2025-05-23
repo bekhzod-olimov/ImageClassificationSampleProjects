@@ -16,6 +16,7 @@ class Visualization:
         os.makedirs(vis_dir, exist_ok = True)
         
         data_names = ["train", "val", "test"]
+        self.colors = ["darkorange", "seagreen", "salmon"]
         self.vis_datas = {data_names[i]: vis_datas[i] for i in range(len(vis_datas))}
         if isinstance(cls_counts, list): 
             self.analysis_datas = {data_names[i]: cls_counts[i] for i in range(len(cls_counts))}
@@ -70,14 +71,14 @@ class Visualization:
         
         plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_{save_name}_data_vis.png")
 
-    def data_analysis(self, cls_counts, save_name):
+    def data_analysis(self, cls_counts, save_name, color):
         print("Data analysis is in process...\n")
         width, text_width, text_height = 0.7, 0.05, 2
         cls_names = list(cls_counts.keys())
         counts = list(cls_counts.values())
         _, ax = plt.subplots(figsize=(20, 10))
         indices = np.arange(len(counts))
-        ax.bar(indices, counts, width, color="darkorange")
+        ax.bar(indices, counts, width, color=color)
         ax.set_xlabel("Class Names", color="black")        
         ax.set_xticks(np.arange(len(cls_names)), labels=cls_names, rotation=90)
         ax.set(xticks=indices, xticklabels=cls_names)
@@ -85,7 +86,7 @@ class Visualization:
         ax.set_title("Dataset Class Imbalance Analysis")
         for i, v in enumerate(counts):
             ax.text(i - text_width, v + text_height, str(v), color="royalblue")
-        plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_data_analysis.png")
+        plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_{save_name}_data_analysis.png")
     
     def plot_pie_chart(self, cls_counts):
         print("Generating pie chart...\n")
@@ -101,6 +102,6 @@ class Visualization:
 
     def visualization(self):  [self.vis(data if self.ds_nomi in ["facial_expression", "pokemon"] else data.dataset, save_name) for (save_name, data) in self.vis_datas.items()]
         
-    def analysis(self): [self.data_analysis(data, save_name) for (save_name, data) in self.analysis_datas.items()]
+    def analysis(self): [self.data_analysis(data, save_name, color) for (save_name, data), color in zip(self.analysis_datas.items(), self.colors)]
 
     def pie_chart(self): [self.plot_pie_chart(data) for data in self.analysis_datas.values()]
