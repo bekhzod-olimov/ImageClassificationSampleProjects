@@ -34,7 +34,7 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "apple_disease": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/{self.ds_nomi}/images"
         elif self.ds_nomi == "animals": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/animal_dataset/animal_dataset/{self.ds_nomi}/{self.ds_nomi}"        
         elif self.ds_nomi == "pokemon": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/{self.ds_nomi}/dataset"        
-        
+        elif self.ds_nomi == "remote_sensing": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/patternnet/PatternNet"         
     
     def get_files(self): 
         if self.ds_nomi in ["dog_breeds"]: self.rasm_yolaklari = [path for im_file in self.rasm_fayllari for path in glob(f"{self.root}/*/*/*{im_file}")]        
