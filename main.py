@@ -8,7 +8,7 @@ from src.vis import Visualization
 from src.plot import PlotLearningCurves
 from src.infer import ModelInferenceVisualizer
 from src.transform import get_tfs
-from data.parse import CustomDataset
+from data.new_parse import CustomDataset
 from data.fetch import DatasetDownloader
 
 def parse_args():

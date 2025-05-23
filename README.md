@@ -44,7 +44,7 @@ python -m ipykernel install --name "ENV_NAME" --user
 The links to the datasets can be found in the [fetch script](https://github.com/bekhzod-olimov/ImageClassificationSampleProjects/blob/13624441bbd226daf7fb3e3d56ed98fbbb230df2/data/fetch.py#L7).
  * Animals Dataset;
 
- * Apple Disease Dataset;
+ * Apple Disease Dataset; 
 
  * Car Brands Dataset;
 
