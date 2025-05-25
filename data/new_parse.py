@@ -5,6 +5,8 @@ from glob import glob
 from PIL import Image
 from torch.utils.data import random_split, Dataset, DataLoader
 from sklearn.model_selection import train_test_split
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 torch.manual_seed(2025)
 
