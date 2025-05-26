@@ -14,9 +14,10 @@ class CustomDataset(Dataset):
     def __init__(self, data_turgan_yolak, ds_nomi, rasm_yolaklari=None, rasm_javoblari=None, tfs=None, data_type=None, rasm_fayllari=[".png", ".jpg", ".jpeg", ".bmp"]):
         
         self.tfs, self.ds_nomi = tfs, ds_nomi
-        self.data_type = data_type
+        self.rasm_fayllari     = rasm_fayllari
+        self.data_type         = data_type
         self.data_turgan_yolak = data_turgan_yolak 
-        self.rasm_fayllari          = rasm_fayllari      
+              
 
         if rasm_yolaklari and rasm_javoblari: self.rasm_yolaklari = rasm_yolaklari; self.im_lbls = rasm_javoblari
         else: self.get_root(); self.get_files()
