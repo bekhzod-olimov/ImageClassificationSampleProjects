@@ -1,6 +1,4 @@
-import os
-import torch
-import numpy as np
+import os, torch
 from glob import glob
 from PIL import Image
 from torch.utils.data import random_split, Dataset, DataLoader
