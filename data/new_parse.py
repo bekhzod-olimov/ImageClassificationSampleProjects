@@ -19,8 +19,7 @@ class CustomDataset(Dataset):
         self.rasm_fayllari          = rasm_fayllari      
 
         if rasm_yolaklari and rasm_javoblari: self.rasm_yolaklari = rasm_yolaklari; self.im_lbls = rasm_javoblari
-        else:
-            self.get_root(); self.get_files()
+        else: self.get_root(); self.get_files()
             
         self.get_info() 
 
@@ -39,6 +38,7 @@ class CustomDataset(Dataset):
         elif self.ds_nomi == "remote_sensing": self.root = f"{self.data_turgan_yolak}/{self.ds_nomi}/patternnet/PatternNet"         
     
     def get_files(self): 
+
         if self.ds_nomi in ["dog_breeds"]: self.rasm_yolaklari = [path for im_file in self.rasm_fayllari for path in glob(f"{self.root}/*/*/*{im_file}")]        
         elif self.ds_nomi in ["lentils", "apple_disease"]: self.rasm_yolaklari = [path for im_file in self.rasm_fayllari for path in glob(f"{self.root}/*{im_file}")]
         elif self.ds_nomi in ["facial_expression"]: self.rasm_yolaklari = [path for im_file in self.rasm_fayllari for path in glob(f"{self.root}/{self.data_type}/*/*{im_file}")]
@@ -109,9 +109,7 @@ class CustomDataset(Dataset):
             train_paths, temp_paths, train_lbls, temp_lbls = train_test_split( rasm_yolaklari, rasm_javoblari, test_size=(split[1] + split[2]), stratify=rasm_javoblari, random_state=2025 )
             
             val_ratio = split[1] / (split[1] + split[2])
-            val_paths, test_paths, val_lbls, test_lbls = train_test_split(
-                temp_paths, temp_lbls, test_size=(1 - val_ratio), stratify=temp_lbls, random_state=2025
-            )
+            val_paths, test_paths, val_lbls, test_lbls = train_test_split( temp_paths, temp_lbls, test_size=(1 - val_ratio), stratify=temp_lbls, random_state=2025 )
 
             tr_ds = cls(data_turgan_yolak=data_turgan_yolak, ds_nomi = ds_nomi, tfs=tfs, rasm_yolaklari = train_paths, rasm_javoblari = train_lbls)
             vl_ds = cls(data_turgan_yolak=data_turgan_yolak, ds_nomi = ds_nomi, tfs=tfs, rasm_yolaklari = val_paths, rasm_javoblari = val_lbls)
