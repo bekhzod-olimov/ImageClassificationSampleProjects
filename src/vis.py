@@ -1,8 +1,7 @@
-import numpy as np, os
+import os, warnings, numpy as np
 from matplotlib import pyplot as plt
 from torchvision import transforms as T
 from PIL import Image
-import warnings
 warnings.filterwarnings("ignore")
 
 class Visualization:
@@ -52,10 +51,8 @@ class Visualization:
 
         for idx, index in enumerate(indices):
             if count == self.n_ims + 1: break
-            try: 
-                image, label = data.dataset[index]
-            except:
-                image, label = data[index]
+            try:  image, label = data.dataset[index]
+            except: image, label = data[index]
             plt.subplot(self.rows, self.n_ims // self.rows, idx + 1)
             image = self.tn2np(image)
             if Image.fromarray(image).mode != "RGB": image = image.convert("RGB")
@@ -64,10 +61,8 @@ class Visualization:
             else: plt.imshow(image)
 
             plt.axis('off')
-            if self.cls_names is not None:
-                plt.title(f"GT -> {self.cls_names[int(label)]}")
-            else:
-                plt.title(f"GT -> {label}")
+            if self.cls_names is not None: plt.title(f"GT -> {self.cls_names[int(label)]}")
+            else: plt.title(f"GT -> {label}")
         
         plt.savefig(f"{self.vis_dir}/{self.ds_nomi}_{save_name}_data_vis.png")
 
