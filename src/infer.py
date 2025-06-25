@@ -156,6 +156,7 @@ class ModelInferenceVisualizer:
                 plt.title(f"GT -> {gt_name} ; PRED -> {pred_name}", color=color)
         
         os.makedirs(self.outputs_dir, exist_ok = True)
+        plt.tight_layout()        
         plt.savefig(f"{self.outputs_dir}/{self.ds_nomi}_model_performance_analysis.png")
 
         # Plot confusion matrix

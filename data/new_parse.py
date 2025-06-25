@@ -14,8 +14,7 @@ class CustomDataset(Dataset):
         self.tfs, self.ds_nomi = tfs, ds_nomi
         self.rasm_fayllari     = rasm_fayllari
         self.data_type         = data_type
-        self.data_turgan_yolak = data_turgan_yolak 
-              
+        self.data_turgan_yolak = data_turgan_yolak               
 
         if rasm_yolaklari and rasm_javoblari: self.rasm_yolaklari = rasm_yolaklari; self.im_lbls = rasm_javoblari
         else: self.get_root(); self.get_files()
