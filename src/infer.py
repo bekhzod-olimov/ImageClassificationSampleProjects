@@ -41,30 +41,36 @@ class ModelInferenceVisualizer:
         tensor = tensor.permute(1, 2, 0)  
         return (tensor.cpu().numpy() * 255).astype(np.uint8)
 
-    def plot_value_array(self, logits, gt, class_names):
-        
+    def plot_value_array(self, logits, gt, class_names, ax=None):
         probs = torch.nn.functional.softmax(logits, dim=1)
         pred_class = torch.argmax(probs, dim=1)
-        
-        plt.grid(visible=True)
-        plt.xticks(range(len(class_names)), class_names, rotation='vertical')
-        plt.yticks(np.arange(0.0, 1.1, 0.1))
-        bars = plt.bar(range(len(class_names)), [p.item() for p in probs[0]], color="#777777")
-        plt.ylim([0, 1])
-        if isinstance(gt, str):
-            bars[pred_class].set_color('green') if pred_class.item() == class_names[gt] else bars[pred_class].set_color('red')            
-        else:
-            bars[pred_class].set_color('green') if pred_class.item() == gt else bars[pred_class].set_color('red')
-        
-        # Save figure to a buffer
-        import io
-        buf = io.BytesIO()
-        plt.tight_layout()
-        plt.savefig(buf, format='png')
-        plt.close()  # Close the figure after saving it to free memory
-        buf.seek(0)
 
-        return buf 
+        # Use existing axes if provided
+        if ax is None: ax = plt.gca()
+        
+        ax.grid(visible=True)
+        ax.set_xticks(range(len(class_names)))
+        ax.set_xticklabels(class_names, rotation='vertical')
+        ax.set_yticks(np.arange(0.0, 1.1, 0.1))
+        bars = ax.bar(range(len(class_names)), [p.item() for p in probs[0]], color="#777777")
+        ax.set_ylim([0, 1])
+        
+        # Handle ground truth comparison
+        if isinstance(gt, str):
+            gt_idx = class_names.index(gt)  # Convert string GT to index
+            bars[pred_class].set_color('green' if pred_class == gt_idx else 'red')
+        else:
+            bars[pred_class].set_color('green' if pred_class == gt else 'red')
+        
+        # Only save/close for standalone use (demo mode)
+        if ax is None:
+            import io
+            buf = io.BytesIO()
+            plt.tight_layout()
+            plt.savefig(buf, format='png')
+            plt.close()
+            buf.seek(0)
+            return buf
 
     def generate_cam_visualization(self, image_tensor):
         
