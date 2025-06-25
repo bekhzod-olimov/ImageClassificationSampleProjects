@@ -128,7 +128,7 @@ class ModelInferenceVisualizer:
             pred_idx = preds[index]
             gt_idx = lbls[index]
 
-            # Display image
+            # Subplot 1: Image + GradCAM
             plt.subplot(rows, 2 * num_images // rows, count)
             count += 1
             plt.imshow(im, cmap="gray")
@@ -137,21 +137,22 @@ class ModelInferenceVisualizer:
             # GradCAM visualization
             grayscale_cam = self.generate_cam_visualization(images[index])
             visualization = show_cam_on_image(im / 255, grayscale_cam, image_weight=0.4, use_rgb=True)
-            plt.imshow(cv2.resize(visualization, (self.im_size, self.im_size), interpolation=cv2.INTER_LINEAR), alpha=0.7, cmap='jet')
+            plt.imshow(visualization, alpha=0.7)
             plt.axis("off")
 
-            # Prediction probability array
+            # Subplot 2: Class probabilities
             logits = logitss[index]
             if logits.dim() == 1:  # If 1D, add a batch dimension
-                logits = logits.unsqueeze(0)
+                logits = logits.unsqueeze(0)            
             plt.subplot(rows, 2 * num_images // rows, count)
             count += 1
-            bars = self.plot_value_array(logits=logits, gt=gt_idx, class_names=self.class_names)
+            ax = plt.gca()  # Get current axes
+            self.plot_value_array(logits=logits, gt=gt_idx, class_names=self.class_names, ax=ax)
 
             # Title with GT and Prediction
             if self.class_names:
                 gt_name = self.class_names[gt_idx]
-                pred_name = self.class_names[pred_idx]
+                pred_name = self.class_names[pred_idx]                
                 color = "green" if gt_name == pred_name else "red"
                 plt.title(f"GT -> {gt_name} ; PRED -> {pred_name}", color=color)
         
